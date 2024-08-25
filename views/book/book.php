@@ -14,7 +14,7 @@ use yii\bootstrap5\Html; ?>
 <div class="book-page-container">
     <div class="book-page">
         <?php if (Yii::$app->session->hasFlash('error')): ?>
-            <div class="alert-not-success">
+            <div class="alert-failure">
                 <?= Yii::$app->session->getFlash('error') ?>
             </div>
         <?php endif; ?>
