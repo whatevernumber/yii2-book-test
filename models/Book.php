@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use app\helpers\IsbnHelper;
+use app\helpers\ISBNHelper;
 use Yii;
 
 /**
@@ -75,7 +75,7 @@ class Book extends \yii\db\ActiveRecord
      */
     public function validateIsbn($attribute, $params): void
     {
-        $isbnHelper = new IsbnHelper();
+        $isbnHelper = new ISBNHelper();
 
         if (!$isbnHelper->checkIsbn($this->isbn)) {
             $this->addError($attribute, 'Некорректный isbn');
