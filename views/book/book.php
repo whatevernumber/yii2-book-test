@@ -29,9 +29,9 @@ use yii\bootstrap5\Html; ?>
             </h1>
         </div>
         <ul class="book-author-list">
-            <?php foreach ($book->authors as $author): ?>
+            <?php foreach ($book->authors as $key => $author): ?>
                 <li class="book-author">
-                    <?= $author->name . (end($book->authors) !== $author ? ',&nbsp;' : '') ?>
+                    <?= $author->name . (array_key_last($book->authors) === $key ? '' : ',&nbsp;' )?>
                 </li>
             <?php endforeach; ?>
         </ul>

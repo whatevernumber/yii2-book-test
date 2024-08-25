@@ -37,9 +37,9 @@ use yii\widgets\LinkPager;
 
                 <div class="card_section">
                     <ul class="book_author_list">
-                        <?php foreach ($book->authors as $author): ?>
+                        <?php foreach ($book->authors as $key => $author): ?>
                             <li class="book_author">
-                                <?= $author->name . (end($book->authors) !== $author ? ',&nbsp;' : '') ?>
+                                <?= $author->name . (array_key_last($book->authors) === $key ? '' : ',&nbsp;' )?>
                             </li>
                         <?php endforeach; ?>
                     </ul>
