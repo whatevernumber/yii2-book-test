@@ -24,7 +24,7 @@ class Book extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Books';
+        return 'books';
     }
 
     /**

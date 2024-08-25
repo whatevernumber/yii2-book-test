@@ -37,9 +37,9 @@ use yii\bootstrap5\Html; ?>
         </ul>
 
         <p class="book-year">
-                <span>
-                    <?= $book->published_year ?>
-                </span>
+            <span>
+                <?= $book->published_year ?>
+            </span>
         </p>
 
         <div class="book-page-content">
@@ -53,46 +53,50 @@ use yii\bootstrap5\Html; ?>
                     </a>
                 </div>
             <?php endif; ?>
-            <?php if ($book->cover): ?>
-                <div class="book-page-section">
+
+            <div class="book-page-section">
+                <?php if ($book->cover): ?>
                     <div class="book-cover">
                         <img width="400px" src="/web/img/covers/<?= $book->cover ?>"
                              alt="Обложка книги: <?= $book->title ?>">
                     </div>
-                </div>
-            <?php endif; ?>
+                <?php endif; ?>
+            </div>
 
             <div class="book-page-section">
                 <p class="book-description">
                     <?= $book->description ?>
                 </p>
-            </div>
 
+                <?php $form = ActiveForm::begin([
+                    'id' => 'subscription-form',
+                    'action' => ['/subscribe'],
+                    'method' => 'post',
+                    'fieldConfig' => [
+                        'template' => "{label}\n{input}\n{error}",
+                        'labelOptions' => ['class' => 'col-lg-1 col-form-label mr-lg-3'],
+                        'inputOptions' => ['class' => 'col-lg-3 form-control'],
+                        'errorOptions' => ['class' => 'col-lg-7 invalid-feedback'],
+                    ],
+                ]); ?>
 
-            <?php $form = ActiveForm::begin([
-                'id' => 'subscription-form',
-                'action' => ['/subscribe'],
-                'method' => 'post',
-                'fieldConfig' => [
-                    'template' => "{label}\n{input}\n{error}",
-                    'labelOptions' => ['class' => 'col-lg-1 col-form-label mr-lg-3'],
-                    'inputOptions' => ['class' => 'col-lg-3 form-control'],
-                    'errorOptions' => ['class' => 'col-lg-7 invalid-feedback'],
-                ],
-                'options' => ['class' => 'subscription-form'],
-            ]); ?>
-            <?= $form->field($subs_form, 'phone_number')->textInput(['autofocus' => false, 'type' => 'tel']) ?>
-            <?php foreach ($book->authors as $author): ?>
-                <?= Html::hiddenInput('subs[]', $value = $author->id) ?>
-            <?php endforeach; ?>
-            <div class="form-group">
-                <div>
-                    <?= Html::submitButton('Подписаться', ['class' => 'subscription-button', 'name' => 'subscribe-button']) ?>
+                <?= $form->field($subs_form, 'phone_number')
+                    ->textInput(['autofocus' => false, 'type' => 'tel', 'placeholder' => '+7'])
+                    ->label('Укажите номер телефона для подписки на новые книги автора:', ['class' => 'phone_number_label'])
+                ?>
+
+                <?php foreach ($book->authors as $author): ?>
+                    <?= Html::hiddenInput('subs[]', $value = $author->id) ?>
+                <?php endforeach; ?>
+
+                <div class="form-group">
+                    <div>
+                        <?= Html::submitButton('Подписаться', ['class' => 'subscription-button', 'name' => 'subscribe-button']) ?>
+                    </div>
                 </div>
+
+                <?php ActiveForm::end(); ?>
             </div>
-
-            <?php ActiveForm::end(); ?>
-
         </div>
     </div>
 </div>
@@ -152,7 +156,7 @@ use yii\bootstrap5\Html; ?>
         text-align: justify;
     }
 
-    .book-page .subscription-form {
+    .book-page #subscription-form {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -162,6 +166,11 @@ use yii\bootstrap5\Html; ?>
         background-color: white;
         font-size: 18px;
         border: 1px solid #a6b5cc;
+    }
+
+    .book-page .phone_number_label {
+        width: 100%;
+        margin-bottom: 15px;
     }
 
     .book-page .subscription-button {
@@ -180,13 +189,15 @@ use yii\bootstrap5\Html; ?>
         max-width: 600px;
         padding: 20px;
         border-radius: 5px;
+        font-size: 18px;
+        color: white;
     }
 
     .alert-success {
         background-color: #93d278;
     }
 
-    .alert-not-success {
+    .alert-failure {
         background-color: #bb5b87;
     }
 

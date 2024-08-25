@@ -37,14 +37,13 @@ $this->title = $book->title ? 'Редактировать ' . $book->title : 'Д
             <?= Html::textInput('book_authors[]', $value = $author->name, ['class' => 'book-book_authors']) ?>
         </div>
     <?php endforeach; ?>
-    <div class="field-book-book_authors-new">
+    <div class="field-book-book_authors">
         <?= Html::textInput('book_authors[]', '', ['class' => 'book-book_authors', 'placeholder' => 'Автор']) ?>
     </div>
-    <div>
-        <?php if ($book->getErrors('book_authors')): ?>
-            <span class="error_authors">Укажите хотя бы одного автора</span>
-        <?php endif; ?>
-    </div>
+
+    <?php if ($book->getErrors('book_authors')): ?>
+        <span class="error_authors">Укажите хотя бы одного автора</span>
+    <?php endif; ?>
 
     <div class="form_fields_control">
         <button type="button" id="add_field_button">+</button>
@@ -55,7 +54,7 @@ $this->title = $book->title ? 'Редактировать ' . $book->title : 'Д
 
     <?php if ($book->cover): ?>
         <p>При загрузке нового файла обложка будет обновлена</p>
-        <img width="50px" height="100px" src="/web/img/covers/<?= $book->cover ?>">
+        <img class="book-cover-file" width="100px" height="100px" src="/web/img/covers/<?= $book->cover ?>">
     <?php endif; ?>
 
     <?= $form->field($book, 'cover_image', ['options' => ['class' => 'new-file']])->fileInput(['multiple' => false])->label(''); ?>
@@ -82,6 +81,18 @@ $this->title = $book->title ? 'Редактировать ' . $book->title : 'Д
         width: 100%;
     }
 
+    .field-book-book_authors {
+        margin-bottom: 15px;
+    }
+
+    #book-form .new-file {
+        margin-bottom: 15px;
+    }
+
+    #book-form .book-cover-file {
+        object-fit: cover;
+    }
+
     .error_authors {
         color: #dc3545;
     }
@@ -96,7 +107,7 @@ $this->title = $book->title ? 'Редактировать ' . $book->title : 'Д
         remove_button.click(remove_field);
         
         function add_field(e) {
-            const fieldset = $(this).parent().prev('div');
+            const fieldset = $(this).parent().prev('.field-book-book_authors');
             const new_field = fieldset.clone();
         
             new_field.find('input').val('');
@@ -104,12 +115,12 @@ $this->title = $book->title ? 'Редактировать ' . $book->title : 'Д
         }
         
         function remove_field (e) {
-            const fields_left = document.querySelectorAll('.book-book_authors');
+            const fields_left = document.querySelectorAll('.field-book-book_authors');
         
             if (fields_left.length > 1) {
                 $(this).parent().prev('div').remove();
             } else {
-                ($(fields_left[0]).val(''));
+                ($(fields_left[0]).find('input').val(''));
             }
         }
     JS

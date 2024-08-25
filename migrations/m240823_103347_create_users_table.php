@@ -20,9 +20,10 @@ class m240823_103347_create_users_table extends Migration
         ]);
 
         $this->createIndex(
-            'inx-email',
+            'idx-email-unique',
             'users',
-            ['email']
+            ['email'],
+            true
         );
     }
 

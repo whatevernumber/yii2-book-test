@@ -18,9 +18,10 @@ class m240823_103238_create_authors_table extends Migration
         ]);
 
         $this->createIndex(
-            'idx-author',
+            'idx-author-unique',
             'authors',
             ['name'],
+            true
         );
     }
 

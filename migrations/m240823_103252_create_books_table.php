@@ -20,6 +20,8 @@ class m240823_103252_create_books_table extends Migration
             'published_year' => $this->smallInteger()->notNull(),
             'cover' => $this->string(),
         ]);
+
+        $this->createIndex('idx-year', 'books', ['published_year']);
     }
 
     /**

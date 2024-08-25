@@ -10,8 +10,7 @@
 
 <div class="top-page">
     <h1 class="top-header">
-        Больше всего книг за
-        <span style="color: #dc3545">
+        Больше всего книг за <span style="color: #dc3545">
             <select id="year_select">
                 <?php foreach ($years as $period): ?>
                     <option value="<?= $period['year'] ?>" <?= $period['year'] == $year ? 'selected' : '' ?>>
@@ -25,23 +24,22 @@
     <div class="top-table">
         <table>
             <thead>
-                <th>
-                    Имя
-                </th>
-                <th>
-                    Количество книг
-                </th>
-            </thead>
-        <?php foreach ($authors as $author): ?>
             <tr>
-                <td>
-                    <?= $author->name ?>
-                </td>
-                <td>
-                    <?= $author->book_count ?>
-                </td>
+                <td>Имя</td>
+                <td>Количество книг</td>
             </tr>
-        <?php endforeach; ?>
+            </thead>
+
+            <?php foreach ($authors as $author): ?>
+                <tr>
+                    <td>
+                        <?= $author->name ?>
+                    </td>
+                    <td>
+                        <?= $author->book_count ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
         </table>
     </div>
 </div>
