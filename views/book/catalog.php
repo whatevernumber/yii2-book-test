@@ -55,7 +55,7 @@ use yii\widgets\LinkPager;
                     <a href="<?= \yii\helpers\Url::to(['book/edit/' . $book->id]) ?>">
                         Редактировать
                     </a>
-                    <a href="<?= \yii\helpers\Url::to(['book/delete' . $book->id]) ?>">
+                    <a href="<?= \yii\helpers\Url::to(['book/delete/' . $book->id]) ?>">
                         Удалить
                     </a>
                 </div>
