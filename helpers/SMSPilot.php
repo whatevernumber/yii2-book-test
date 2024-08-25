@@ -1,4 +1,7 @@
 <?php
+
+namespace app\helpers;
+
 /* SMS Pilot.Class API/PHP v1.9.10
  * SEE: http://www.smspilot.ru/apikey.php
 
