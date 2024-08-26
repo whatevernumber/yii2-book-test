@@ -77,6 +77,7 @@ $config = [
         ],
         'queue' => [
             'class' => \yii\queue\redis\Queue::class,
+            'as log' => \yii\queue\LogBehavior::class,
             'redis' => 'redis',
             'channel' => 'queue',
         ],
