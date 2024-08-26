@@ -28,11 +28,11 @@ class SubscribeController extends Controller
                 }
 
                 $sub = new Subscription();
-                $sub->phone_number = $subscription->phone_number;
+                $sub->phone_number = preg_replace('[\D]', '', $subscription->phone_number);
                 $sub->author_id = $author->id;
 
                 try {
-                    $sub->save();
+                    $sub->save(false);
                     Yii::$app->session->setFlash('success', "Подписка на новые книги автора " . $author->name . " успешна!");
                 } catch (\Exception $exception) {
                     Yii::$app->session->setFlash('error', "Вы уже подписаны на книги автора " . $author->name);
